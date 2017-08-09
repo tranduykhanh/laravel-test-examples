@@ -13,8 +13,7 @@ before_script:
   - mysql -e 'CREATE DATABASE homestead_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'
   - chmod -R 777 storage/
   - chmod -R 777 bootstrap/cache/
-  - cp .env.travis.example .env.testing
-  - cp .env.example .env
+  - cp .env.travis.example .env
   - composer install --no-interaction
   - curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
   - sudo apt-get install -y nodejs
