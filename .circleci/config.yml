@@ -19,7 +19,11 @@ jobs:
           MYSQL_PASSWORD: secret
           MYSQL_ROOT_PASSWORD: root
 
+      - image: selenium/standalone-chrome:3.1.0
+
     working_directory: ~/repo
+
+    parallelism: 4
 
     steps:
       - checkout
@@ -63,3 +67,14 @@ jobs:
           path: /phpunit
       - store_artifacts:
           path: /phpunit
+      - run:
+          name: Start Chrome Driver
+          command: ./vendor/laravel/dusk/bin/chromedriver-linux
+          background: true
+      - run:
+          name: Run Laravel Server
+          command: php artisan serve
+          background: true
+      - run:
+          name: Run Laravel Dusk Tests
+          command: php artisan dusk
